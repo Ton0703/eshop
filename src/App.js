@@ -1,11 +1,15 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.scss';
+import Home from './pages/home';
 
 function App() {
   return (
-    <div className="App">
-      1
-    </div>
+    <Router>
+      <Switch>
+       <Route path='/' component={Home} />
+      </Switch>
+    </Router>
   );
 }
 
