@@ -1,3 +1,52 @@
-.card{
+.card {
+  width: 100%;
+  height: 40vw;
+  display: flex;
+  flex-direction: column;
+
+  .picture-wrapper {
+    position: relative;
     width: 100%;
+    height: 85%;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      .pic-slogan {
+        transform: translateY(0);
+      }
+    }
+
+    .pic-slogan {
+      width: 100%;
+      height: 60px;
+      background-color: gray;
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+
+    .info-price {
+      font-size: 0.8rem;
+      color: gray;
+    }
+  }
 }

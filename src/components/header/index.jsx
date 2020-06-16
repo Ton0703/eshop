@@ -9,7 +9,11 @@ function Header() {
             <div className='ins'>
                 <AiOutlineInstagram />
             </div>
-            <div className="logo">SHOMA</div>
+            <div className="logo">
+                <span>
+                   SHOMA
+                </span>
+            </div>
             <div className="info">
                 <div className="user">
                     <AiOutlineUser />

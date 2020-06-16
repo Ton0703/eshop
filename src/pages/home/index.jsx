@@ -3,6 +3,7 @@ import './index.scss'
 import Header from '@/components/header'
 import Carousel from '@/components/carousel1' 
 import Collection from '@/components/collection'
+import Card from '../../components/card'
 
 
 
@@ -37,7 +38,7 @@ function Home() {
                     Tops
                 </div>
                 <div className="product-list">
-                    
+                    <Card />
                 </div>
             </section>
         </div>
