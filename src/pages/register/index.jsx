@@ -1,22 +1,25 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/user/action";
 import * as Yup from "yup";
 import "./index.scss";
 
 import Header from "../../components/header";
 
-const initialValues = { name: "", password: "", email: "" };
-const onSubmit = (values) => {
-  console.log(values);
-};
-const validationSchema = Yup.object({
-  name: Yup.string().required("没有输入用户名"),
-  password: Yup.string().required("没有输入密码"),
-  email: Yup.string().email("格式不正确").required("没有输入邮箱"),
-});
-
 function Register() {
+  const dispatch = useDispatch()
+  const initialValues = { name: "", password: "", email: "" };
+  const onSubmit = (values) => {
+    console.log(values);
+    dispatch(register({name: values.name, password: values.password, email: values.email}))
+  };
+  const validationSchema = Yup.object({
+    name: Yup.string().required("没有输入用户名"),
+    password: Yup.string().required("没有输入密码"),
+    email: Yup.string().email("格式不正确").required("没有输入邮箱"),
+  });
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -45,7 +48,9 @@ function Register() {
             name="name"
             id="name"
           />
-          {formik.errors.name ? <div className='form-error'>{formik.errors.name}</div> : null}
+          {formik.touched.name && formik.errors.name ? (
+            <div className="form-error">{formik.errors.name}</div>
+          ) : null}
           <input
             type="email"
             onChange={formik.handleChange}
@@ -54,7 +59,9 @@ function Register() {
             name="email"
             id="email"
           />
-           {formik.errors.email ? <div className='form-error'>{formik.errors.email}</div> : null}
+          {formik.touched.email && formik.errors.email ? (
+            <div className="form-error">{formik.errors.email}</div>
+          ) : null}
           <input
             type="password"
             onChange={formik.handleChange}
@@ -63,7 +70,9 @@ function Register() {
             name="password"
             id="password"
           />
-           {formik.errors.password ? <div className='form-error'>{formik.errors.password}</div> : null}
+          {formik.touched.password && formik.errors.password ? (
+            <div className="form-error">{formik.errors.password}</div>
+          ) : null}
           <button type="submit">提交</button>
         </form>
       </div>

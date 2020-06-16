@@ -1,21 +1,26 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/user/action";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./index.scss";
 
 import Header from "../../components/header";
 
-const initialValues = { name: "", password: "" };
-const onSubmit = (values) => {
-  console.log(values);
-};
-const validationSchema = Yup.object({
-  name: Yup.string().required("用户名为空"),
-  password: Yup.string().required("密码为空")
-});
-
 function Login() {
+  const dispatch = useDispatch();
+
+  const initialValues = { name: "", password: "" };
+  const onSubmit = (values) => {
+    console.log(values);
+    dispatch(login({ name: values.name, password: values.password }));
+  };
+  const validationSchema = Yup.object({
+    name: Yup.string().required("用户名为空"),
+    password: Yup.string().required("密码为空"),
+  });
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -44,7 +49,9 @@ function Login() {
             name="name"
             id="name"
           />
-          {formik.errors.name ? <div className='form-error'>{formik.errors.name}</div> : null}
+          {formik.touched.name && formik.errors.name ? (
+            <div className="form-error">{formik.errors.name}</div>
+          ) : null}
           <input
             type="password"
             onChange={formik.handleChange}
@@ -53,7 +60,9 @@ function Login() {
             name="password"
             id="password"
           />
-          {formik.errors.password ? <div className='form-error'>{formik.errors.password}</div> : null}
+          {formik.touched.password && formik.errors.password ? (
+            <div className="form-error">{formik.errors.password}</div>
+          ) : null}
           <button type="submit">提交</button>
         </form>
       </div>
