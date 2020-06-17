@@ -6,7 +6,7 @@ import AuthRoute from './utils/authRoute'
 
 //pages
 import Home from './pages/home';
-import Products from './pages/prodeucs';
+import Products from './pages/product';
 import Register from './pages/register'
 import Login from './pages/login'
 import User from './pages/user';

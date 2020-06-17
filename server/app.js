@@ -5,7 +5,7 @@ const logger = require("koa-logger");
 const cors = require("koa2-cors");
 const error = require("koa-json-error");
 const parameter = require("koa-parameter");
-const dotenv = require("dotenv");
+//const dotenv = require("dotenv");
 //dotenv.config({path: './config.env'})
 const path = require("path");
 const { connect } = require("./DB/connect");

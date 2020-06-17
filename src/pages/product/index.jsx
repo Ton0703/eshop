@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Header from "../../components/header";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useDispatch } from 'react-redux'
+import { cartAdd } from '../../redux/cart/action'
 import "./index.scss";
 
 function Products(props) {
   //以后用formik重构
   const [count, setCount] = useState(0);
-  const [color, setColor] = useState(0);
+  const [color, setColor] = useState('');
   const [size, setSize] = useState("");
   const [number, setNumber] = useState(1);
   //测试数据
@@ -30,6 +32,8 @@ function Products(props) {
       tip: '身丈 69.0 身巾 57.0 肩巾 51.0 袖丈 24.0 裄丈 49.5 袖巾 25.5 袖口巾 20.5 天巾 28.0 前下り 6.0 後下り 2.0 裾幅 51.0 '
   }]
 
+  const dispatch = useDispatch()
+
   const handlePointClick = (n) => {
     setCount(n);
   };
@@ -41,6 +45,10 @@ function Products(props) {
   const handleAddClick = () => {
     setNumber(number + 1);
   };
+
+  const handleCartBtn = () => {
+    console.log(dispatch(cartAdd({pic , title, price, number, color, size})))
+  }
 
   const arr = new Array(pic.length).fill(0);
 
@@ -69,10 +77,9 @@ function Products(props) {
             <label htmlFor="color">Color :</label>
             <div className="color-list">
               {colorList.map((item, index) => (
-                <div className='border-out' style={{ borderColor: color === item ? "black" : "#e7e7e7"}}>
+                <div className='border-out' key={index} style={{ borderColor: color === item ? "black" : "#e7e7e7"}}>
                   <div
                   className="color-item"
-                  key={index}
                   style={{
                     backgroundColor: item,
                   }}
@@ -108,7 +115,7 @@ function Products(props) {
             </div>
           </div>
           <div className="product-button">
-            <div className="addCart-btn btn ">加入购物车！</div>
+            <div className="addCart-btn btn" onClick={handleCartBtn}>加入购物车！</div>
             <div className="buyNow-btn btn">立刻购买！</div>
           </div>
           <div className="tips">
@@ -116,8 +123,8 @@ function Products(props) {
                   各尺寸详情 （单位：cm）
               </div>
               <div className="tips-list">
-                 {tips.map((item, idnex) => (
-                     <div className="tip">
+                 {tips.map((item, index) => (
+                     <div className="tip" key={index}>
                          <div className="tip-size">
                              {item.size}
                          </div>
