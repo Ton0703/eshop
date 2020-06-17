@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './index.scss'
 
 import { AiOutlineInstagram, AiOutlineUser, AiOutlineShoppingCart, AiOutlineRight } from "react-icons/ai";
@@ -16,7 +17,9 @@ function Header() {
             </div>
             <div className="info">
                 <div className="user">
-                    <AiOutlineUser />
+                    <Link to='/user'>
+                         <AiOutlineUser />
+                    </Link>
                 </div>
                 <div className="cart">
                     <AiOutlineShoppingCart />

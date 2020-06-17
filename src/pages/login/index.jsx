@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/user/action";
+import { useDispatch, useSelector } from "react-redux";
+import { login, clear } from "../../redux/user/action";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./index.scss";
@@ -10,6 +10,10 @@ import Header from "../../components/header";
 
 function Login() {
   const dispatch = useDispatch();
+  useEffect(() => {
+     dispatch(clear())
+  }, [dispatch])
+  const msg = useSelector(state => state.user.error_msg)
 
   const initialValues = { name: "", password: "" };
   const onSubmit = (values) => {
@@ -41,6 +45,7 @@ function Login() {
           <span onClick={handleToLogin}>去注册</span>！
         </div>
         <form onSubmit={formik.handleSubmit}>
+          {msg ? <div className='error-msg'>{msg}</div> : null}
           <input
             type="text"
             onChange={formik.handleChange}

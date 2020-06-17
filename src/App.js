@@ -2,11 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.scss';
 
+import AuthRoute from './utils/authRoute'
+
 //pages
 import Home from './pages/home';
 import Products from './pages/prodeucs';
 import Register from './pages/register'
 import Login from './pages/login'
+import User from './pages/user';
 
 function App() {
   return (
@@ -14,8 +17,9 @@ function App() {
       <Switch>
        <Route path='/' component={Home} exact/>
        <Route path='/products' component={Products} />
-       <Route path='/login' component={Login} />
-       <Route path='/register' component={Register} />
+       <AuthRoute path='/login' component={Login} />
+       <AuthRoute path='/register' component={Register} />
+       <Route path='/user' component={User} />
       </Switch>
     </Router>
   );

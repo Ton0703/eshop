@@ -6,7 +6,6 @@ import Collection from '@/components/collection'
 import Card from '../../components/card'
 
 
-
 function Home() {
     return (
         <div className='home'>

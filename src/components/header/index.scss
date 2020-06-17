@@ -12,6 +12,15 @@
       width: 24px;
       height: 24px;
       cursor: pointer;
+      fill: #000;
+    }
+    a {
+      svg {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        fill: #000;
+      }
     }
   }
 
@@ -22,11 +31,10 @@
     font-weight: 600;
     letter-spacing: 0.2rem;
 
-    span{
+    span {
       display: block;
       transform: translateX(20px);
     }
-
   }
 
   .info {

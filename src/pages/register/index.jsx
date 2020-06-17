@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { register } from "../../redux/user/action";
+import { useDispatch, useSelector } from "react-redux";
+import { register, clear } from "../../redux/user/action";
 import * as Yup from "yup";
 import "./index.scss";
 
 import Header from "../../components/header";
 
 function Register() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(clear());
+  }, [dispatch]);
+  const msg = useSelector((state) => state.user.error_msg);
   const initialValues = { name: "", password: "", email: "" };
   const onSubmit = (values) => {
     console.log(values);
-    dispatch(register({name: values.name, password: values.password, email: values.email}))
+    dispatch(
+      register({
+        name: values.name,
+        password: values.password,
+        email: values.email,
+      })
+    );
   };
   const validationSchema = Yup.object({
     name: Yup.string().required("没有输入用户名"),
@@ -40,6 +50,7 @@ function Register() {
           <span onClick={handleToLogin}>去登陆</span>！
         </div>
         <form onSubmit={formik.handleSubmit}>
+          {msg ? <div className="error-msg">{msg}</div> : null}
           <input
             type="text"
             onChange={formik.handleChange}
